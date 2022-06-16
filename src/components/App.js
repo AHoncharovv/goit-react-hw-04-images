@@ -33,8 +33,7 @@ export function App() {
     fetchPicture(searchValue, page)
       .then(response => {
         setTotalPages(response.total);
-        setSearchPicture([...searchPicture, ...response.hits]);
-        console.log(searchPicture)
+        setSearchPicture(prevState =>[...prevState, ...response.hits]);
       })
       .catch(err => {
         setError(err)
