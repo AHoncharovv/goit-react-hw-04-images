@@ -6,21 +6,19 @@ import s from './Modal.module.css'
 const modalRoot = document.querySelector('#modal-root');
 
 export default function Modal({ url, onClick }) {
-    
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    const handleKeyDown = e => {
-        if (e.code === 'Escape') {
-            return onClick()
-        }
-    }
-
+   
     useEffect(() => {
+
+        function handleKeyDown(e) {
+            if (e.code === 'Escape') { return onClick() }
+        }
+
         window.addEventListener('keydown', handleKeyDown)
 
         return () => { window.removeEventListener('keydown', handleKeyDown) }
-    }, [handleKeyDown])
+    }, [onClick])
 
-    const onclickModalClose = event => {
+    function onclickModalClose(event) {
         if (event.currentTarget === event.target) {
             onClick();
         }
